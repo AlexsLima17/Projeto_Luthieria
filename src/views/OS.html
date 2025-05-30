@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>LowTone Lab - OS</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    label { display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 8px; margin-top: 4px; }
+    .checkbox-group label { display: inline-block; width: 48%; }
+    button { margin-top: 20px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h1>Ordem de Serviço - LowTone Lab</h1>
+
+  <label>Nome do Cliente:<input type="text" id="cliente"></label>
+  <label>Telefone:<input type="text" id="telefone"></label>
+  <label>Instrumento:<input type="text" id="instrumento"></label>
+
+  <div class="checkbox-group">
+    <label><input type="checkbox" value="Regulagem"> Regulagem</label>
+    <label><input type="checkbox" value="Limpeza"> Limpeza</label>
+    <label><input type="checkbox" value="Blindagem"> Blindagem</label>
+    <label><input type="checkbox" value="Troca de Cordas"> Troca de Cordas</label>
+  </div>
+
+  <label>Observações:<textarea id="observacoes"></textarea></label>
+  <label>Data de Entrada:<input type="date" id="entrada"></label>
+  <label>Previsão de Entrega:<input type="date" id="entrega"></label>
+  <label>Valor Estimado:<input type="text" id="valor"></label>
+
+  <label>Status:
+    <select id="status">
+      <option>Aberta</option>
+      <option>Em Andamento</option>
+      <option>Finalizada</option>
+    </select>
+  </label>
+
+  <button onclick="salvarOS()">Salvar OS</button>
+  <button onclick="gerarPDF()">Gerar PDF</button>
+
+  <script src="rendererOS.js"></script>
+</body>
+</html>
