@@ -85,31 +85,39 @@ function clientWindow() {
         })
     }
     client.loadFile('./src/views/cliente.html')
-    client.center() //iniciar no centro da tela   
 }
 
 // Janela os
-let os
 function osWindow() {
-    nativeTheme.themeSource = 'light'
-    const main = BrowserWindow.getFocusedWindow()
-    if (main) {
-        os = new BrowserWindow({
-            width: 1010,
-            height: 680,
-            //autoHideMenuBar: true,
-            //resizable: false,
-            parent: main,
-            modal: true,
-            //ativação do preload.js
-            webPreferences: {
-                preload: path.join(__dirname, 'preload.js')
-            }
-        })
-    }
-    os.loadFile('./src/views/OS.html')
-    os.center() //iniciar no centro da tela   
+    nativeTheme.themeSource = 'light';
+
+    // Tenta usar a janela focada, mas se não tiver, use a principal criada no início
+    const parent = BrowserWindow.getFocusedWindow() || BrowserWindow.getAllWindows()[0];
+
+    os = new BrowserWindow({
+        width: 1010,
+        height: 680,
+        parent: parent,
+        modal: true,
+        show: false, // evita piscar da janela ao abrir
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            nodeIntegration: false,
+        }
+    });
+
+    os.loadFile('./src/views/OS.html');
+
+    os.once('ready-to-show', () => {
+        os.show();
+    });
+
+    os.on('closed', () => {
+        os = null;
+    });
 }
+
 
 
 // Iniciar a aplicação
@@ -220,6 +228,10 @@ const template = [
 ipcMain.on('client-window', () => {
     clientWindow()
 })
+
+ipcMain.on('os-window', () => {
+    osWindow();
+});
 
 // ============================================================
 // == Clientes - CRUD Create

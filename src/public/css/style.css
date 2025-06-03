@@ -70,8 +70,17 @@ footer p {
     border-radius: 5px;
     border: 1px solid #f44336;
 }
-.img-os {
-    width: 150px; /* ou o tamanho que quiser */
-    height: auto; /* mantém proporção */
-  }
+.container-icons {
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    gap: 40px; /* espaçamento entre os ícones */
+    margin-top: 40px; /* margem superior opcional */
+}
+
+.icon {
+    width: 100px; /* ajuste conforme seu layout */
+    height: auto;
+    cursor: pointer; /* deixa o mouse como uma mãozinha */
+}
+
   
