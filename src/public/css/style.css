@@ -70,15 +70,16 @@ footer p {
     border-radius: 5px;
     border: 1px solid #f44336;
 }
+
 .container-icons {
     display: flex;
     justify-content: center; /* centraliza horizontalmente */
-    gap: 40px; /* espaçamento entre os ícones */
-    margin-top: 40px; /* margem superior opcional */
+    gap: 100px; /* espaçamento entre os ícones */
+    margin-top: 100px; /* margem superior opcional */
 }
 
 .icon {
-    width: 100px; /* ajuste conforme seu layout */
+    width: 200px; /* ajuste conforme seu layout */
     height: auto;
     cursor: pointer; /* deixa o mouse como uma mãozinha */
 }

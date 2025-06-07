@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexsLima17/cadastro-clientes.git"
+    "url": "https://github.com/AlexsLima17/Projeto_Luthieria.git"
   },
   "author": "Alex Lima",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlexsLima17/cadastro-clientes#issues"
+    "url": "https://github.com/AlexsLima17/Projeto_Luthieria#issues"
   },
-  "homepage": "https://github.com/AlexsLima17/cadastro-clientes#readme",
+  "homepage": "https://github.com/AlexsLima17/Projeto_Luthieria#readme",
   "devDependencies": {
     "electron": "^34.2.0"
   },

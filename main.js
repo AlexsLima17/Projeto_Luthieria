@@ -160,11 +160,15 @@ app.on('before-quit', () => {
 // template do menu
 const template = [
     {
-        label: 'Cadastro',
+        label: 'Páginas',
         submenu: [
             {
                 label: 'Clientes',
                 click: () => clientWindow()
+            },
+            {
+                label: 'Ordem de Serviço',
+                click: () => osWindow()
             },
             {
                 type: 'separator'
@@ -616,3 +620,26 @@ ipcMain.on('update-client', async (event, client) => {
 })
 // == Fim - Crud update =======================================
 // ============================================================
+
+ipcMain.on('new-os', async (event, osData) => {
+    try {
+        const db = client.db('seubanco'); // exemplo
+        const collection = db.collection('ordens');
+
+        await collection.insertOne(osData);
+        console.log("OS salva com sucesso!");
+    } catch (err) {
+        console.error("Erro ao salvar OS:", err);
+    }
+});
+
+const Ordem = require('./models/ordem.model');
+
+ipcMain.on('new-os', async (event, osData) => {
+    try {
+        await Ordem.create(osData);
+        console.log("✅ Ordem de Serviço salva no banco 'dbos'");
+    } catch (error) {
+        console.error("❌ Erro ao salvar OS:", error);
+    }
+});

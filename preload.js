@@ -22,5 +22,6 @@ contextBridge.exposeInMainWorld('api', {
     setName: (args) => ipcRenderer.on('set-name', args),
     deleteClient: (id) => ipcRenderer.send('delete-client', id),
     updateClient: (client) => ipcRenderer.send('update-client', client),
-    setCpf: (args) => ipcRenderer.on('set-cpf', args)
+    setCpf: (args) => ipcRenderer.on('set-cpf', args),
+    newOS: (osData) => ipcRenderer.send('new-os', osData)
 })

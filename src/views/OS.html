@@ -1,46 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
-  <title>LowTone Lab - OS</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
-    label { display: block; margin-top: 10px; }
-    input, select, textarea { width: 100%; padding: 8px; margin-top: 4px; }
-    .checkbox-group label { display: inline-block; width: 48%; }
-    button { margin-top: 20px; padding: 10px 20px; }
-  </style>
+  <title>LowTone Lab - Ordem de Serviço</title>
+  <link rel="stylesheet" href="../public/css/os.css" />
 </head>
+
 <body>
-  <h1>Ordem de Serviço - LowTone Lab</h1>
 
-  <label>Nome do Cliente:<input type="text" id="cliente"></label>
-  <label>Telefone:<input type="text" id="telefone"></label>
-  <label>Instrumento:<input type="text" id="instrumento"></label>
+  <form onsubmit="event.preventDefault(); salvarOS();">
+    <h1 class="form-header">Ordem de Serviço - LowTone Lab</h1>
 
-  <div class="checkbox-group">
-    <label><input type="checkbox" value="Regulagem"> Regulagem</label>
-    <label><input type="checkbox" value="Limpeza"> Limpeza</label>
-    <label><input type="checkbox" value="Blindagem"> Blindagem</label>
-    <label><input type="checkbox" value="Troca de Cordas"> Troca de Cordas</label>
-  </div>
+    <!-- Área de busca do cliente -->
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <input
+        type="text"
+        class="form-control"
+        id="searchClient"
+        maxlength="30"
+        spellcheck="false"
+      />
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="btnRead"
+        onclick="searchName()"
+      >
+        Buscar
+      </button>
+    </div>
 
-  <label>Observações:<textarea id="observacoes"></textarea></label>
-  <label>Data de Entrada:<input type="date" id="entrada"></label>
-  <label>Previsão de Entrega:<input type="date" id="entrega"></label>
-  <label>Valor Estimado:<input type="text" id="valor"></label>
+    <hr />
 
-  <label>Status:
-    <select id="status">
-      <option>Aberta</option>
-      <option>Em Andamento</option>
-      <option>Finalizada</option>
+    <!-- Campo oculto -->
+    <input type="hidden" id="inputIdClient" />
+
+    <label for="inputNameClient">Nome do Cliente</label>
+    <input type="text" id="inputNameClient" maxlength="30" spellcheck="false" required />
+
+    <label for="inputPhoneClient">Telefone</label>
+    <input type="text" id="inputPhoneClient" maxlength="15" spellcheck="false" required />
+
+    <label for="instrumento">Instrumento</label>
+    <input type="text" id="instrumento" />
+
+    <label for="servicos">Serviços</label>
+    <select id="servicos">
+      <option>Regulagem</option>
+      <option>Limpeza</option>
+      <option>Blindagem</option>
+      <option>Troca de Cordas</option>
     </select>
-  </label>
 
-  <button onclick="salvarOS()">Salvar OS</button>
-  <button onclick="gerarPDF()">Gerar PDF</button>
+    <label for="observacoes">Observações</label>
+    <textarea id="observacoes" rows="3"></textarea>
+
+    <div style="display: flex; gap: 10px;">
+      <div style="flex: 1;">
+        <label for="entrada">Data de Entrada</label>
+        <input type="date" id="entrada" />
+      </div>
+      <div style="flex: 1;">
+        <label for="entrega">Previsão de Entrega</label>
+        <input type="date" id="entrega" />
+      </div>
+    </div>  
+
+    <div style="display: flex; gap: 10px;">
+      <div style="flex: 1;">
+        <label for="valor">Valor Estimado</label>
+        <input type="text" id="valor" />
+      </div>
+      <div style="flex: 1;">
+        <label for="status">Status</label>
+        <select id="status">
+          <option>Aberta</option>
+          <option>Em Andamento</option>
+          <option>Finalizada</option>
+        </select>
+      </div>
+    </div>
+    
+    </select>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-success" id="btnCreate">
+        Adicionar
+      </button>
+      <button type="submit" class="btn btn-warning" id="btnUpdate" disabled>
+        Editar
+      </button>
+      <button type="button" class="btn btn-danger" id="btnDelete" onclick="removeClient()" disabled>
+        Excluir
+      </button>
+      <button type="reset" class="btn btn-secondary" id="btnReset" onclick="resetForm()">
+        Limpar
+      </button>
+    </div>
+  </form>
 
   <script src="rendererOS.js"></script>
 </body>
+
 </html>
